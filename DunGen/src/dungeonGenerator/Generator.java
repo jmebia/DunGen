@@ -127,14 +127,14 @@ public class Generator {
                 // trace next corridors in the Y axis
                 if (y1 - y2 > 0) { // if not negative
                     for (int i = y2; i <= y1; i++) {
-                        if (dungeon[i][x2] == 0)
+                        if (dungeon[i][x2] == VOID)
                             dungeon[i][x2] = CORRIDOR;
                     }
                 }
                 // if negative
                 else {
                     for (int i = y1; i <= y2; i++) {
-                        if (dungeon[i][x2] == 0)
+                        if (dungeon[i][x2] == VOID)
                             dungeon[i][x2] = CORRIDOR;
                     }
                 }

@@ -21,7 +21,7 @@ public class Room {
         this.y = y;
         this.width = width;
         this.height = height;
-        center.setLocation((x + width) / 2, (y + height) / 2);
+        center.setLocation(x + width / 2,y + height / 2);
     }
 
     public int getX() {

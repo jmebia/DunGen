@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Generator generator = new Generator(60,6, 4);
+        Generator generator = new Generator(40,4, 5);
         generator.generateDungeon();
 
         int[][] dungeon = generator.getDungeon();

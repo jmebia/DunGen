@@ -71,7 +71,6 @@ public class Generator {
                     System.out.println("Creating new room (STEP 2)...");
 
                     int maxRoomSize = gridSize - 1;
-                    int minRoomSize = gridSize / 2 + 1;
                     // randomize room size based on the size of the grid
                     // the maximum size is the grid's size + 1 and the minimum is the grid's size / 2
                     int width = new Random().nextInt(maxRoomSize - minRoomSize) + minRoomSize;
@@ -101,21 +100,23 @@ public class Generator {
         // trace all centers from the list
         for ( Room room : rooms) {
 
-            int x1 = (int) room.getCenter().getX();
+            int x1 = (int) room.getCenter().getLocation().getX();
+            int y1 = (int) room.getCenter().getLocation().getY();
+
+            System.out.println("x1 = " + x1 + ", y1 = " + y1);
+
             int x2;
+            int y2;
             try {
-                x2 = rooms.get(rooms.indexOf(room) + 1).getX();
+                Room r2 = rooms.get(rooms.indexOf(room) + 1);
+                x2 = (int) r2.getCenter().getLocation().getX();
+                y2 = (int) r2.getCenter().getLocation().getY();
             } catch (IndexOutOfBoundsException e) {
+                System.out.println("Aborting corridor creation...");
                 break;
             }
 
-            int y1 = (int) room.getCenter().getY();
-            int y2;
-            try {
-                y2 = rooms.get(rooms.indexOf(room) + 1).getY();
-            } catch (IndexOutOfBoundsException e) {
-                break;
-            }
+            System.out.println("x2 = " + x2 + ", y2 = " + y2);
 
             // trace corridor first in the X axis
             if (x1 - x2 > 0) { // if not negative
@@ -138,7 +139,6 @@ public class Generator {
                             dungeon[i][x2] = CORRIDOR;
                     }
                 }
-
             }
             // if negative
             else {
@@ -170,8 +170,8 @@ public class Generator {
 
         for (Room room : rooms) {
 
-            System.out.println("Plotting room "+room.getX()+""+room.getY()+"-"
-                    +room.getHeight()+""+room.getWidth()+"...");
+            System.out.println("Plotting room ("+room.getX()+","+room.getY()+")-h="
+                    +room.getHeight()+", w="+room.getWidth()+"...");
 
             for (int x = room.getX(); x < room.getX() + room.getWidth(); x++) {
                 for (int y = room.getY(); y < room.getY() + room.getHeight(); y++) {

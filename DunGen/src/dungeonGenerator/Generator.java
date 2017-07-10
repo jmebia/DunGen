@@ -107,14 +107,14 @@ public class Generator {
 
             int x2;
             int y2;
+            Room r2;
             try {
-                Room r2 = rooms.get(rooms.indexOf(room) + 1);
-                x2 = (int) r2.getCenter().getLocation().getX();
-                y2 = (int) r2.getCenter().getLocation().getY();
+                r2 = rooms.get(rooms.indexOf(room) + 1);
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Aborting corridor creation...");
-                break;
+                r2 = rooms.get(0);
             }
+            x2 = (int) r2.getCenter().getLocation().getX();
+            y2 = (int) r2.getCenter().getLocation().getY();
 
             System.out.println("x2 = " + x2 + ", y2 = " + y2);
 

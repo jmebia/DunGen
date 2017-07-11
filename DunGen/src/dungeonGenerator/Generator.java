@@ -1,8 +1,7 @@
 package dungeonGenerator;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -11,7 +10,6 @@ import java.util.Random;
 public class Generator {
 
     private ArrayList<Room> rooms = new ArrayList<>();
-
     private int[][] dungeon;
 
     private final int ROOM = 1;
@@ -39,7 +37,7 @@ public class Generator {
         createRooms();
         createCorridors();
 
-        plotMap();
+        plotRooms();
     }
 
     private void initializeMap() {
@@ -51,6 +49,8 @@ public class Generator {
     }
 
     private void createRooms() {
+
+        rooms.clear();
 
         System.out.println("Generating rooms started...");
 
@@ -82,9 +82,9 @@ public class Generator {
                     int xPos = x + (x==0? 1 : ( x==mapSize? -1 : new Random().nextInt((gridSize - width))));
                     int yPos = y + (y==0? 1 : ( y==mapSize? -1 : new Random().nextInt((gridSize - height))));
 
-                    System.out.println("Room added at (" + x + ", " + y + ")");
+                    rooms.add(new Room(xPos, yPos, width, height, rooms.size() + 1));
 
-                    rooms.add(new Room(xPos, yPos, width, height));
+                    System.out.println("Room "+rooms.get(rooms.size()-1).getId()+" added");
 
                 }
             }
@@ -95,6 +95,8 @@ public class Generator {
 
     private void createCorridors() {
 
+        // shuffle rooms
+        Collections.shuffle(rooms);
 
         // collect all center points
         // trace all centers from the list
@@ -140,6 +142,7 @@ public class Generator {
                     }
                 }
             }
+
             // if negative
             else {
                 for (int i = x1; i <= x2; i++) {
@@ -166,7 +169,7 @@ public class Generator {
         }
     }
 
-    private void plotMap() {
+    private void plotRooms() {
 
         for (Room room : rooms) {
 

@@ -13,5 +13,3 @@ generator.generateDungeon();
 ```java
 int[][] dungeon = generator.getDungeon(); 
 ```
-
-<em>This project is still a <strong>Work In Progress</strong> (WIP)</em>
